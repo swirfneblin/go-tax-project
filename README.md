@@ -1,5 +1,6 @@
 # go-tax-project
 
+Presents a CRUD example with SOLID, interfaces,  and good practices using GoLang
 
 ```
 sqlite3 db.sqlite3

@@ -13,7 +13,7 @@ docker push [YOUR_USER]/go-tax-project
 ### Create table orders
 ```
 sqlite3 db.sqlite3
-CREATE TABLE orders (id VARCHAR(255) NOT NULL, price float NOT NULL, tax float NOT NULL, final_price NOT NULL, PRIMARY KEY (id));
+sqlite> CREATE TABLE orders (id VARCHAR(255) NOT NULL, price float NOT NULL, tax float NOT NULL, final_price NOT NULL, PRIMARY KEY (id));
 ```
 
 ### Run docker compose to start RabbitMq server
@@ -30,14 +30,6 @@ Open web browser http://localhost:15672/ and create a queue called 'order', so p
 
 ```
 
-### Creating kubernetes cluster (using kind)
-
-Create cluster and apply manifests inside k8s path.
-```
-kind create cluster 
-kubectl appply -f k8s
-``` 
-
 ### Running
 To run the `main.go` program: `go cmd/order/main.go`   
 If you need debug code, might it run nodemon comand to watch changes  
@@ -45,6 +37,15 @@ If you need debug code, might it run nodemon comand to watch changes
 nodemon --exec go run cmd/api/main.go --signal SIGTERM
 ```
 
-### * Using docker 
+-----
+### Bonus
+#### * Using docker 
 If you prefer uses docker, run: `docker run -p 8888:8888 swirfneblin/go-tax-project`   
 
+#### * Using kubernetes 
+Create cluster (using kind) and apply manifests inside k8s path.
+```
+kind create cluster 
+kubectl apply -f k8s
+kubectl port-forward svc/goapp 8888:8888
+``` 
